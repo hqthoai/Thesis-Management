@@ -64,6 +64,8 @@ function Sidebar() {
         { title: "Manage Schedule", link: "/manage-schedule" },
         { title: "Manage Thesis", link: "/manage-thesis" },
         { title: "Manage Term", link: "/manage-term" },
+        { title: "Manage Major", link: "/manage-major" },
+        { title: "Manage Lecturer", link: "/manage-faculty" },
         { title: "Student Test", link: "/students" },
         { title: "Logout", link: "/logout" },
       ]);

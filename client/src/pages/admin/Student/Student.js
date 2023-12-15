@@ -13,7 +13,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import ToastMessage from '../../../components/ToastMessage/ToastMessage';
 import FormStudent from './FormStudent';
 import userService from '../../../services/userServices';
-
+import UserSubmitForm from '../../../components/Form/UserSubmitForm';
 export default function Student() {
     
     const columns = [
@@ -89,21 +89,44 @@ export default function Student() {
         setShowForm(true);
         console.log('Edit clicked for row with id:', id);
     };
+    // const handleDelete = async (id) => {
+    //     const respone = await userService.deleteUser(id);
+    //     console.log(respone);
+    //     if (respone.status === 204) {
+    //         setMessage('Xóa user thành công');
+    //         setTypeMessage('success');
+    //         setTimeout(() => {
+    //             setMessage('');
+    //             setTypeMessage('');
+    //         }, 3000);
+    //         const updatedStudents = students.filter((student) => student._id !== id);
+    //         setStudents(updatedStudents);
+    //     } else {
+    //         setMessage('Xóa user thất bại');
+    //         setTypeMessage('error');
+    //     }
+    // };
+
     const handleDelete = async (id) => {
-        const respone = await userService.deleteUser(id);
-        console.log(respone);
-        if (respone.status === 204) {
-            setMessage('Xóa user thành công');
-            setTypeMessage('success');
-            setTimeout(() => {
-                setMessage('');
-                setTypeMessage('');
-            }, 3000);
-            const updatedStudents = students.filter((student) => student._id !== id);
-            setStudents(updatedStudents);
-        } else {
-            setMessage('Xóa user thất bại');
-            setTypeMessage('error');
+        const shouldDelete = window.confirm('Are you sure you want to delete this user?');
+
+        if (shouldDelete) {
+            const response = await userService.deleteUser(id);
+
+            if (response.status === 204) {
+                setMessage('Deleted user successfully');
+                setTypeMessage('success');
+                setTimeout(() => {
+                    setMessage('');
+                    setTypeMessage('');
+                }, 3000);
+
+                const updatedStudents = students.filter((student) => student._id !== id);
+                setStudents(updatedStudents);
+            } else {
+                setMessage('Failed to delete user');
+                setTypeMessage('error');
+            }
         }
     };
     return (
@@ -158,7 +181,8 @@ export default function Student() {
                         disableRowSelectionOnClick
                 />
             </Box>
-            {showForm && (<FormStudent handleClose={handleCloseForm} type={formType} id={sId}/>) }
+            {/* {showForm && (<FormStudent handleClose={handleCloseForm} type={formType} id={sId}/>) } */}
+            {showForm && (<UserSubmitForm handleClose={handleCloseForm} type='student' id={sId} actions={formType}/>) }
             
         </Box>
     

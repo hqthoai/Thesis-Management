@@ -12,7 +12,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
-import ToastMessage from '../../../components/ToastMessage/ToastMessage';
+import ToastMessage from '../ToastMessage/ToastMessage';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -21,8 +21,8 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
-import userService from '../../../services/userServices';
-import majorService from '../../../services/majorService';
+import userService from '../../services/userServices';
+import majorService from '../../services/majorService';
 
 
 
@@ -141,12 +141,15 @@ export default function UserSubmitForm({handleClose, id, type, actions}) {
 
     React.useEffect(() => {
         async function fetchUser() {
-            const user = await userService.getUserById(id);
-            setUser(user);
+            
             const majors = await majorService.getAllMajor();
+            console.log('majors in user submit:', majors);
             setMajors(majors);
-            if (type === 'edit' ) {
-                setStudentId({ value: user.userId || '', message: '' });
+            if (actions === 'edit' ) {
+                const user = await userService.getUserById(id);
+                console.log('edit',user);
+            setUser(user);
+                setUserId({ value: user.studentId || '', message: '' });
                 setFirstName({ value: user.firstName || '', message: '' });
                 setLastName({ value: user.lastName || '', message: '' });
                 setEmail({ value: user.email || '', message: '' });
@@ -157,18 +160,27 @@ export default function UserSubmitForm({handleClose, id, type, actions}) {
                 setMajor({ value: user.major || '', message: '' });
             }
         }
-        if(actions==="edit") {
-            fetchUser();
-        }
-        
+        // if(actions==="edit") {
+        //     fetchUser();
+        // }
+        fetchUser();
     },[])
 
+
+    // create new user
     const handleSubmit = async (e) => {
+        let idFieldName = type === 'faculty' ? 'facultyId' : 'studentId';
+
         e.preventDefault();
         if (!checkError()) {
+            
+            if(type === 'faculty') {
+                
+            }
             const data = {
-                studentId: userId.value,
-                type:'student',
+                //  studentId: userId.value ,
+                [idFieldName]: userId.value,
+                type:type,
                 firstName: firstName.value,
                 lastName: lastName.value,
                 email: email.value,
@@ -178,8 +190,9 @@ export default function UserSubmitForm({handleClose, id, type, actions}) {
                 birthday: birthday,
                 major: major.value,
             };
-            if (type === 'create') {
+            if (actions === 'create') {
                 const respone = await userService.createUser(data);
+                console.log('respone in user sb', respone);
                 // call api to create new user
                 if (respone.status === 201) {
                     setMessage('Tạo student thành công');
@@ -191,7 +204,7 @@ export default function UserSubmitForm({handleClose, id, type, actions}) {
                     setAddress({ value: '', message: '' });
                     setPhone({ value: '', message: '' });
                     setBirthday(null);
-                    setStudentId({ value: '', message: '' });
+                    setUserId({ value: '', message: '' });
                     setMajor({ value: '', message: '' });
                 } else {
                     setMessage('Tạo student thất bại');
@@ -226,7 +239,7 @@ export default function UserSubmitForm({handleClose, id, type, actions}) {
         <Dialog open={true} onClose={handleClose}>
         <form onSubmit={handleSubmit}>
             {/* <DialogTitle>{type === 'create' ?'Add New Student':'Update Student'}</DialogTitle> */}
-            <DialogTitle>{type === 'create' ?'Add New Student':'Update Student'}</DialogTitle>
+            <DialogTitle>{actions === 'create' ?'Add New Student':'Update Student'}</DialogTitle>
             <DialogContent sx={{ width:"600px" }}>
                 <ToastMessage message={message} type={typeMessage} />
                 <Box>
@@ -394,10 +407,10 @@ export default function UserSubmitForm({handleClose, id, type, actions}) {
                 <Button onClick={handleClose}>Cancel</Button>
                 {
                     type === 'create' ? 
-                    // (<Button type='submit'>Add</Button>) : 
-                    // (<Button type='submit'>Update</Button>)
-                    (<Button type='submit'>{actions}</Button>) : 
-                    (<Button type='submit'>{actions}</Button>)
+                    (<Button type='submit'>Add</Button>) : 
+                    (<Button type='submit'>Update</Button>)
+                    // (<Button type='submit'>{actions}</Button>) : 
+                    // (<Button type='submit'>{actions}</Button>)
                 }
             </DialogActions>
             </form>

@@ -13,6 +13,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import ToastMessage from '../../../components/ToastMessage/ToastMessage';
 import FormFaculty from './FormFaculty';
 import userService from '../../../services/userServices';
+import UserSubmitForm from '../../../components/Form/UserSubmitForm';
 
 export default function Faculty() {
     
@@ -156,7 +157,8 @@ export default function Faculty() {
                         disableRowSelectionOnClick
                 />
             </Box>
-            {showForm && (<FormFaculty handleClose={handleCloseForm} type={formType} id={sId}/>) }
+            {/* {showForm && (<FormFaculty handleClose={handleCloseForm} type={formType} id={sId}/>) } */}
+            {showForm && (<UserSubmitForm handleClose={handleCloseForm} type='faculty' id={sId} actions={formType}/>) }
             
         </Box>
     

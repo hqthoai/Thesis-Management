@@ -17,24 +17,60 @@ import authService from '../services/authServices';
 
 export default function Login() {
     const navigate = useNavigate()
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        const data = {
-            email: formData.get('email'),
-            password:  formData.get('password'),
-        };
-        const isSignedIn = await authService.signIn(data);
-        if (isSignedIn) {
-            console.log(isSignedIn);
-            localStorage.setItem('account', JSON.stringify(isSignedIn))
-            navigate('/dashboard');
-        }
-        else {
-            alert('Sai tài khoản hoặc mật khẩu!');
-        }
+    // const handleSubmit = async (event) => {
+    //     event.preventDefault();
+    //     const formData = new FormData(event.currentTarget);
         
-    };
+    //     const data = {
+    //         email: formData.get('email'),
+    //         password:  formData.get('password'),
+    //     };
+    //     const isSignedIn = await authService.signIn(data);
+    //     if (isSignedIn) {
+    //         console.log(isSignedIn);
+    //         localStorage.setItem('account', JSON.stringify(isSignedIn))
+    //         navigate('/dashboard');
+    //     }
+    //     else {
+    //         alert('Sai tài khoản hoặc mật khẩu!');
+    //     }
+        
+    // };
+    const handleBlurEmail = (event) => {
+      const email = event.target.value;
+
+      // Check if the email contains '@gmail.com'
+      if (!email || !email.includes('@gmail.com')) {
+          alert('Invalid email format. Please use a valid Gmail address.');
+      }
+  };
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const email = formData.get('email');
+      const password = formData.get('password');
+
+      // Check if the email contains '@gmail.com'
+      if (!email || !email.includes('@gmail.com')) {
+          alert('Invalid email format. Please use a valid Gmail address.');
+          return;
+      }
+
+      const data = {
+          email,
+          password,
+      };
+      const isSignedIn = await authService.signIn(data);
+
+      if (isSignedIn) {
+          console.log(isSignedIn);
+          localStorage.setItem('account', JSON.stringify(isSignedIn))
+          navigate('/dashboard');
+      } else {
+          alert('Invalid account or password!');
+      }
+  };
+
 
   return (
       <Grid container component="main" sx={{ height: '100vh'}}>
@@ -79,6 +115,7 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onBlur={handleBlurEmail}
               />
               <TextField
                 margin="normal"
