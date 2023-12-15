@@ -1,5 +1,5 @@
 import DefaultLayout from "../layouts/DefaultLayout/DefaultLayout";
-import Instruction from "../pages/Instructions/Instruction";
+
 import ListFaculty from "../pages/ListFaculty";
 import ListThesis from "../pages/ListThesis";
 import Notification from "../pages/Notification";
@@ -18,6 +18,7 @@ import Major from "../pages/admin/Major/Major";
 import RegisterAccount from "../pages/RegisterAccount";
 import Table from "../components/Table/StudentTable.js";
 import ThesisTable from "../components/Table/StudentBussinessTable.js";
+import Instruction from "../pages/Instructions/Instruction";
 
 // Route khong can dang nhap
 const publicRoutes = [
