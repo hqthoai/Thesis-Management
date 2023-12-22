@@ -30,7 +30,7 @@ function Header() {
                                 />
                             </Badge>
                         </IconButton>
-                        <AuthUser user ={user} />
+                        {/* <AuthUser user ={user} /> */}
                     </Stack>
                 </Toolbar>
             </AppBar>

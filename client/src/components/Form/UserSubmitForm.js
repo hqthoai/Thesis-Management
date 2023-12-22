@@ -34,8 +34,8 @@ export default function UserSubmitForm({
 }) {
   const [message, setMessage] = React.useState("");
   const [typeMessage, setTypeMessage] = React.useState("");
-  const [user, setUser] = React.useState({});
-  const account = useSelector((state) => state.account);
+  // const [user, setUser] = React.useState({});
+  // const account = useSelector((state) => state.account);
 
   const [userId, setUserId] = React.useState({
     value: "",
@@ -156,9 +156,8 @@ export default function UserSubmitForm({
       const majors = await majorService.getAllMajor();
       setMajors(majors);
       if (actions === "edit") {
-        console.log(account);
-        // const user = await userService.getUserById(id);
-        setUser(account);
+        const user = await userService.getUserById(id);
+        // setUser(account);
         setUserId({
           value: user.studentId ? user.studentId : user.facultyId || "",
           message: "",
@@ -226,10 +225,10 @@ export default function UserSubmitForm({
       setMessage("Vui lòng kiểm tra các trường đã nhập");
       setTypeMessage("error");
     }
-    setTimeout(() => {
-      setMessage("");
-      setTypeMessage("");
-    }, 3000);
+    // setTimeout(() => {
+    //   setMessage("");
+    //   setTypeMessage("");
+    // }, 3000);
   };
 
   return (
