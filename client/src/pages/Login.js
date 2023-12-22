@@ -134,10 +134,10 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -146,7 +146,7 @@ export default function Login() {
             >
               Login
             </Button>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password ?
@@ -157,7 +157,7 @@ export default function Login() {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid>
+          </Grid>*/}
             <GoogleLogin
               clientId={CLIENT_ID}
               buttonText="Login with google"
