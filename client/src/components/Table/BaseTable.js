@@ -191,35 +191,14 @@ const BaseTable = ({ data, type, setReloadPage }) => {
           />
         </div>
         <ToastMessage message= {message} type={typeMessage}/>
-        {/* {isPT && type === "exercises" && (
-          <div>
-            <button
-              type="reset"
-              className="bg-red-700 text-white h-[40px] w-[120px] hover:border-3  px-2 hover:opacity-80"
-              onClick={() => setOpenAddExerciseModel((state) => !state)}
-            >
-              Add Exercise
-            </button>
-          </div>
-        )}
-        {isAdmin && type === "pts" && (
-          <div>
-            <button
-              type="reset"
-              className="bg-red-700 text-white h-[60px] w-[150px] hover:border-3  px-2 hover:opacity-80"
-              onClick={() => setOpenAddTrainerModal((state) => !state)}
-            >
-              Add Personal Trainer
-            </button>
-          </div>
-        )} */}
+        
       </div>
       <table className="border border-gray-700 w-full text-left">
         <thead className="bg-red-800 text-center">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="capitalize px-3.5 py-2">
+                <th key={header.id} className="capitalize py-2">
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
@@ -239,7 +218,7 @@ const BaseTable = ({ data, type, setReloadPage }) => {
                 `}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-3.5 py-2 text-center">
+                  <td key={cell.id} className="py-3 text-center">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
