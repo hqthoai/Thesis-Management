@@ -43,22 +43,11 @@ export default function ProfileCard() {
           <Badge
             overlap="circular"
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            badgeContent={
-              <PhotoCameraIcon
-                sx={{
-                  border: "5px solid white",
-                  backgroundColor: "#ff558f",
-                  borderRadius: "50%",
-                  padding: ".2rem",
-                  width: 35,
-                  height: 35
-                }}
-              ></PhotoCameraIcon>
-            }
+            
           >
             <Avatar
               sx={{ width: 100, height: 100, mb: 1.5 }}
-              src={user.photo}
+              src={'https://cdn.pixabay.com/photo/2012/08/27/14/19/mountains-55067_1280.png'}
             ></Avatar>
           </Badge>
 
@@ -87,16 +76,7 @@ export default function ProfileCard() {
         {/* </Grid> */}
 
         {/* BUTTON */}
-        <Grid item style={styles.details} sx={{ width: "100%" }}>
-          <Button
-            variant="contained"
-            color="secondary"
-            sx={{ width: "99%", p: 1, my: 2 }}
-            onClick={handleUploadImage}
-          >
-            Upload Avatar
-          </Button>
-        </Grid>
+        
       </Grid>
     </Card>
   );

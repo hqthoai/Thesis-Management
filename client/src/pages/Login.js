@@ -106,9 +106,9 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            THESIS FORUM HCMUTE MÃI ĐỈNH
           </Typography>
-          <Box
+          {/* <Box
             component="form"
             noValidate
             onSubmit={handleSubmit}
@@ -133,19 +133,19 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
+            /> */}
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             /> */}
-            <Button
+            {/* <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Login
-            </Button>
+            </Button> */}
             {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -158,7 +158,11 @@ export default function Login() {
                 </Link>
               </Grid>
           </Grid>*/}
-            <GoogleLogin
+            
+          {/* </Box> */}
+          <Button sx={{mt:2, variant:"contain", width:'100%'}}>
+            
+          <GoogleLogin
               clientId={CLIENT_ID}
               buttonText="Login with google"
               onSuccess={onSuccess}
@@ -166,7 +170,7 @@ export default function Login() {
               cookiePolicy={"single_host_origin"}
               isSignedIn={true}
             />
-          </Box>
+          </Button>
         </Box>
       </Grid>
     </Grid>

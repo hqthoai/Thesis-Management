@@ -211,34 +211,16 @@ export default function UserSubmitForm({
         message: "Please enter an email address.",
       });
       return false;
-    } else {
-      let validEmail = email.value
-        .toLowerCase()
-        .match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/); // @ and .
-      if (validEmail) {
-        // Additional check for Gmail
-        if (email.value.toLowerCase().endsWith("@gmail.com")) {
-          setEmail({
-            ...email,
-            message: "",
-          });
-          return true;
-        } else {
-          setEmail({
-            ...email,
-            message: "Must includes @gmail.com in your email",
-          });
-          return false;
-        }
-      } else {
+    }  else {
         setEmail({
           ...email,
           message:
-            "Invalid email address. Email does not contain special characters",
+            
+          ""
         });
-        return false;
+        return true;
       }
-    }
+    
   };
 
   // end section validation data

@@ -30,12 +30,13 @@ function ThesisDetail() {
             borderRadius: 3,
             height: 200,
             mb: 2,
+            ml: 12,
           }}
         >
           <img
-            src="https://repository-images.githubusercontent.com/642914611/99c9f34b-76a5-4972-aa43-447830758fcb"
-            width={400}
-            height={400}
+            src="https://cdn-icons-png.flaticon.com/512/6176/6176805.png"
+            width={200}
+            height={200}
             alt={"FIT"}
           />
         </Box>
