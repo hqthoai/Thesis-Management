@@ -12,7 +12,7 @@ import taskService from "../../../services/taskService";
 import Typography from "@mui/material/Typography";
 import thesisService from "../../../services/thesisService";
 import SubmitTaskForm from "../../../components/Form/SubmitTaskForm";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 function ViewTopicDetail({ type }) {
   const { id } = useParams();
   const [thesis, setThesis] = useState();
@@ -78,7 +78,14 @@ function ViewTopicDetail({ type }) {
                   }}
                 >
                   <ListItemText primary={index + 1 + ") " + task.description} />
-                  <Typography>{task.status}</Typography>
+                  {task.status === "done" ? (
+                    <Box>
+                      <CheckCircleIcon color="success"/>
+                    </Box>
+                  ) : (
+                    <Typography textTransform={"capitalize"}>{task.status}</Typography>
+                  )}
+                  {/* <Typography>{task.status==="done" ? <CheckCircleIcon/> : task.status}</Typography> */}
                 </ListItemButton>
               </ListItem>
             ))}

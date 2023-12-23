@@ -49,8 +49,13 @@ const BaseTable = ({ data, type, setReloadPage }) => {
                 onClick={async (e) => {
                   e.preventDefault();
                   console.log(info.getValue());
-                  await thesisService.approveThesisById(info.getValue());
+                  const respone = await thesisService.approveThesisById(info.getValue());
+                  if (respone ) {
+                    setMessage("Approve A Thesis Successfully")
+                    setTypeMessage("success")
+                  }
                   setReloadPage((state) => state + 1);
+                  
                 }}
               >
                 Approve
@@ -60,8 +65,12 @@ const BaseTable = ({ data, type, setReloadPage }) => {
                 className="bg-gray-700 text-white h-[30px] w-[90px] hover:border-3  hover:opacity-80"
                 onClick={async (e) => {
                   e.preventDefault();
-                  await thesisService.declineThesisById(info.getValue());
+                  const respone = await thesisService.declineThesisById(info.getValue());
                   setReloadPage((state) => state + 1);
+                  if (respone ) {
+                    setMessage("Decline A Thesis Successfully")
+                    setTypeMessage("success")
+                  }
                 }}
               >
                 Decline

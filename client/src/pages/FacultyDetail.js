@@ -9,13 +9,18 @@ function FacultyDetail() {
   React.useEffect(() => {
     async function fetchFaculty() {
       const data = await userService.getUserById(id);
+      console.log('Faculty information: ', data);
       setFaculty(data);
     }
     fetchFaculty();
   }, []);
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", ml: 24 }}>
+    <Box>
+      <Typography sx={{ fontWeight: "bold", fontSize: "24px" }}>
+        Faculty Detail{" "}
+      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", ml: 24 }}>
       <Box
         sx={{
           lineHeight: 0,
@@ -26,7 +31,7 @@ function FacultyDetail() {
         }}
       >
         <img
-          src="https://faculty.ai/wp-content/uploads/2023/01/About-us-header.jpg"
+          src="https://img.freepik.com/free-vector/group-people-illustration-set_52683-33806.jpg?size=626&ext=jpg&ga=GA1.1.1788614524.1703203200&semt=ais"
           width={300}
           height={300}
           alt={"Faculty"}
@@ -38,6 +43,9 @@ function FacultyDetail() {
         </Typography>
         <Typography sx={{ mb: 1, ml: 12 }}>
           <strong>Last Name:</strong> {faculty.lastName}
+        </Typography>
+        <Typography sx={{ mb: 1, ml: 12 }}>
+          <strong>Major:</strong> {faculty.major?.name}
         </Typography>
         <Typography sx={{ mb: 1, ml: 12 }}>
           <strong>Email: </strong>
@@ -52,6 +60,7 @@ function FacultyDetail() {
           {faculty.address}
         </Typography>
       </Box>
+    </Box>
     </Box>
   );
 }

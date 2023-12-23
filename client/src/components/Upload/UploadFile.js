@@ -1,11 +1,11 @@
-
+import {Button} from '@mui/material'
 
 function UploadFile({onUpload, onChange}) {
 
     return (
         <div>
             <input type="file" onChange={onChange} />
-            <button onClick={onUpload}>Upload</button>
+            <Button variant="contained" onClick={onUpload}>Upload</Button>
         </div>
     );
 }

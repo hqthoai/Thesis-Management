@@ -26,7 +26,9 @@ const AssignLecturerReviewForm = ({
       setFormData({
         ...formData,
         panelists: [...formData.panelists, selectedLecturer],
+        
       });
+      formData["panelists"] = [...formData.panelists, selectedLecturer];
       formData["defenseDate"] = new Date(selectedDate);
       console.log(formData);
       const response = await thesisService.assignDefenseLecturer(

@@ -56,7 +56,7 @@ function Sidebar() {
         { title: "Profile", link: "/student/profile", icon2: PortraitIcon },
         { title: "Register Thesis", link: "/student/assign-thesis", icon2: AppRegistrationIcon },
         { title: "Manage Thesis", link: "/student/manage-thesis", icon2: TopicIcon },
-        { title: "Logout", link: "/logout", icon2: LogoutIcon },
+        // { title: "Logout", link: "/logout", icon2: LogoutIcon },
       ]);
     else if (role === "faculty") {
       if (account.isHeadDep)
@@ -70,14 +70,14 @@ function Sidebar() {
             link: "/head-lecturer/approved-thesis",
             icon2: ApartmentIcon,
           },
-          { title: "Logout", link: "/logout", icon2: LogoutIcon },
+          // { title: "Logout", link: "/logout", icon2: LogoutIcon },
         ]);
       else
         setSettings([
           { title: "Profile", link: "/faculty/profile" ,icon2: PortraitIcon},
           { title: "Register Thesis", link: "/faculty/register-thesis", icon2: AppRegistrationIcon },
           { title: "Manage Thesis", link: "/faculty/manage-thesis",icon2: TopicIcon },
-          { title: "Logout", link: "/logout", icon2: LogoutIcon },
+          // { title: "Logout", link: "/logout", icon2: LogoutIcon },
         ]);
     } else if (role === "admin") {
       setSettings([
@@ -87,7 +87,7 @@ function Sidebar() {
         { title: "Manage Schedule", link: "/manage-schedule", icon2: ScheduleSendIcon  },
         { title: "Manage Thesis", link: "/manage-thesis", icon2: TopicIcon},
         { title: "Manage Term", link: "/manage-term", icon2:TerminalIcon },
-        { title: "Logout", link: "/logout" , icon2: LogoutIcon},
+        // { title: "Logout", link: "/logout" , icon2: LogoutIcon},
         
       ]);
     }
@@ -124,21 +124,49 @@ function Sidebar() {
             const IconComponent = setting.icon2 !== "EqualizerIcon" ? setting.icon2 : EqualizerIcon;
             console.log(setting);
             return (
-              <Link Link to={`${setting.link}`}>
+              // <Link Link to={`${setting.link}`}>
+              //   <ListItem disablePadding>
+              //     <ListItemButton
+              //       selected={selectedIndex === 0}
+              //       onClick={async () => {
+              //         handleListItemClick(index);
+              //         if (setting.title === "Logout") {
+              //           await authService.logout(account);
+              //           localStorage.removeItem("account");
+              //           navigate("/login");
+              //         }
+              //       }}
+              //     >
+              //       <StyledListItemIcon sx={{ minWidth: "40px" }}>
+                      
+              //         <IconComponent fontSize="medium" sx={{ color: "#fff" }} />
+              //       </StyledListItemIcon>
+              //       <ListItemText
+              //         primary={`${setting.title}`}
+              //         primaryTypographyProps={{
+              //           fontSize: "16px",
+              //           color: "#fff",
+              //         }}
+              //       />
+              //     </ListItemButton>
+              //   </ListItem>
+              // </Link>
+              <Link
+                Link
+                to={`${setting.link === "/logout" ? "/login" : setting.link}`}
+              >
                 <ListItem disablePadding>
                   <ListItemButton
                     selected={selectedIndex === 0}
                     onClick={async () => {
                       handleListItemClick(index);
                       if (setting.title === "Logout") {
-                        await authService.logout(account);
-                        localStorage.removeItem("account");
+                        dispatch(accountsSlices.actions.deleteAccount());
                         navigate("/login");
                       }
                     }}
                   >
                     <StyledListItemIcon sx={{ minWidth: "40px" }}>
-                      
                       <IconComponent fontSize="medium" sx={{ color: "#fff" }} />
                     </StyledListItemIcon>
                     <ListItemText
